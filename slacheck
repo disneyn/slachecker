@@ -1,0 +1,61 @@
+import neopixel
+import board
+import time
+import cv2
+import numpy as np
+
+pixell = neopixel.NeoPixel(board.D18, 1, auto_write=False)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLACK = (0, 0, 0)
+
+colors ={
+    "DARKGREEN": {
+        "weaker" : np.array([80, 100, 100]),
+        "stronger" : np.array([95,255,255])
+    },
+    "GREEN":{
+        "weaker" : np.array([56, 180, 100]),
+        "stronger" : np.array([65,255,255])
+    },
+    "ORANGE":{
+        "weaker" : np.array([20, 100, 100]),
+        "stronger" : np.array([35,255,255])
+    }
+}
+
+path = "/home/pi/raspberry-pi-opencv/tests/picture.jpg"
+img  = cv2.imread(path)
+imgCropped = img[180:935,0:400]
+hsv = cv2.cvtColor(imgCropped, cv2.COLOR_BGR2HSV)
+
+
+def has_color(hsv, colorname):
+    c = colors[colorname]
+    mask = cv2.inRange(hsv, c["weaker"], c["stronger"])
+    pixels = cv2.countNonZero(mask)
+    return pixels > 0
+
+while True:
+
+
+    if has_color(imgCropped, "DARKGREEN"):
+        pixell.fill(RED)
+        pixell.show()
+        print("Found dark green")
+        time.sleep(30)
+        print("CHECKING AGAIN")
+    if has color(img, "GREEN"):
+        pixell.fill(ORANGE)
+        pixell.show()
+        print("SLA WILL EXPIRE TODAY")
+    if has color(img, "DARKGREEN"):
+        pixell.fill(GREEN)
+        pixell.show()
+        print("SLA WILL EXPIRE TOMORROW")
+    else :
+        pixell.fill(BLACK)
+        pixell.show()
+        print("LIST IS EMPTY")
+        time.sleep(30)
+        print("CHECKING AGAIN")

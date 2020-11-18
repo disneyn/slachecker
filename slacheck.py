@@ -71,6 +71,9 @@ if __name__ == "__main__":
             print("Found DARK GREEN - setting diode color to GREEN")
             pixell.fill(GREEN)
             pixell.show()
+            cv2.imshow('Image', imgCropped)
+            cv2.imshow('Results', mask)
+            time.sleep(30)
         else:
             #
             # PIC_COLOR_1 not found in picture, keep checking

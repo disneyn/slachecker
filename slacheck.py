@@ -102,6 +102,6 @@ if __name__ == "__main__":
                     pixell.fill(BLACK)
                     pixell.show()
                     print("Found no PIC_COLOR_X - setting pixel to BLACK")
-                    time.sleep(30)
 
+        time.sleep(30)
         print("CHECKING AGAIN")

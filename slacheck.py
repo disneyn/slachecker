@@ -55,7 +55,7 @@ def has_color(hsv, colorname):
 #
 if __name__ == "__main__":
 
-    path = "/home/pi/raspberry-pi-opencv/tests/picture.jpg"
+    path = "/home/pi/raspberry-pi-opencv/tests/arnika.jpg"
 
     while True:
 
@@ -68,8 +68,8 @@ if __name__ == "__main__":
             #
             # Found PIC_COLOR_1 in picture, setting LED to RED
             #
-            print("Found PIC_COLOR_1 - setting diode color to RED")
-            pixell.fill(RED)
+            print("Found DARK GREEN - setting diode color to GREEN")
+            pixell.fill(GREEN)
             pixell.show()
         else:
             #
@@ -79,7 +79,7 @@ if __name__ == "__main__":
                 #
                 # Found PIC_COLOR_2 in picture, setting LED to RED
                 #
-                print("Found PIC_COLOR_2 - setting diode color to ORANGE")
+                print("Found GREEN - setting diode color to ORANGE")
                 pixell.fill(ORANGE)
                 pixell.show()
                 print("SLA WILL EXPIRE TODAY")
@@ -91,10 +91,10 @@ if __name__ == "__main__":
                     #
                     # Found PIC_COLOR_3 in picture, setting LED to GREEN
                     #
-                    print("Found PIC_COLOR_3 - setting diode color to GREEN")
-                    pixell.fill(GREEN)
+                    print("Found ORANGE - setting diode color to RED")
+                    pixell.fill(RED)
                     pixell.show()
-                    print("SLA WILL EXPIRE TOMORROW")
+                    print("SLA WILL EXPIRE IN 1 HOUR")
                 else:
                     #
                     # Found Neither PIC_COLOR_1, 2 nor 3 in picture, setting LED to BLACK

@@ -42,8 +42,11 @@ colors ={
 }
 
 
+mask = None
 
 def has_color(hsv, colorname):
+    global mask # Hacky way of using global variables in Python
+
     c = colors[colorname]
     mask = cv2.inRange(hsv, c["weaker"], c["stronger"])
     pixels = cv2.countNonZero(mask)
@@ -64,6 +67,10 @@ if __name__ == "__main__":
         imgCropped = img[180:935,0:400]
         hsv = cv2.cvtColor(imgCropped, cv2.COLOR_BGR2HSV)
 
+        # Update on every loop
+        cv2.imshow('Image', imgCropped)
+        cv2.imshow('Results', mask)
+
         if has_color(imgCropped, "PIC_COLOR_1"):
             #
             # Found PIC_COLOR_1 in picture, setting LED to RED
@@ -71,8 +78,6 @@ if __name__ == "__main__":
             print("Found DARK GREEN - setting diode color to GREEN")
             pixell.fill(GREEN)
             pixell.show()
-            cv2.imshow('Image', imgCropped)
-            cv2.imshow('Results', mask)
             time.sleep(30)
         else:
             #
@@ -105,7 +110,10 @@ if __name__ == "__main__":
                     pixell.fill(BLACK)
                     pixell.show()
                     print("Found no PIC_COLOR_X - setting pixel to BLACK")
-                    
+
+        # Needed for CV2 image stuff to work
+        cv2.waitKey(0)
+
         time.sleep(30)
 
         print("CHECKING AGAIN")

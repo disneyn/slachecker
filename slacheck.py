@@ -55,7 +55,7 @@ def has_color(hsv, colorname):
 #
 if __name__ == "__main__":
 
-    path = "/home/pi/raspberry-pi-opencv/tests/arnika.jpg"
+    path = "/home/pi/raspberry-pi-opencv/tests/picture.jpg"
 
     while True:
 

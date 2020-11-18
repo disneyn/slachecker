@@ -95,13 +95,14 @@ if __name__ == "__main__":
                     pixell.fill(GREEN)
                     pixell.show()
                     print("SLA WILL EXPIRE TOMORROW")
-                else :
+                else:
                     #
                     # Found Neither PIC_COLOR_1, 2 nor 3 in picture, setting LED to BLACK
                     #
                     pixell.fill(BLACK)
                     pixell.show()
                     print("Found no PIC_COLOR_X - setting pixel to BLACK")
-
+                    
         time.sleep(30)
+
         print("CHECKING AGAIN")

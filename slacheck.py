@@ -71,8 +71,6 @@ if __name__ == "__main__":
             print("Found PIC_COLOR_1 - setting diode color to RED")
             pixell.fill(RED)
             pixell.show()
-            time.sleep(30)
-            print("CHECKING AGAIN")
         else:
             #
             # PIC_COLOR_1 not found in picture, keep checking

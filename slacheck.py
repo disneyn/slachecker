@@ -50,6 +50,8 @@ def has_color(hsv, colorname):
     c = colors[colorname]
     mask = cv2.inRange(hsv, c["weaker"], c["stronger"])
     pixels = cv2.countNonZero(mask)
+    print("{} pixels are matching color {} to {} ".format(pixell,c["weaker"], c["stronger"]))
+
     return pixels > 0
 
 
@@ -76,7 +78,6 @@ if __name__ == "__main__":
             # Found PIC_COLOR_1 in picture, setting LED to RED
             #
             print("Found DARK GREEN - setting diode color to GREEN")
-            print("{} pixels are matching color {} to {} ".format(pixell, weaker, stronger))
             pixell.fill(GREEN)
             pixell.show()
             time.sleep(30)
@@ -89,7 +90,6 @@ if __name__ == "__main__":
                 # Found PIC_COLOR_2 in picture, setting LED to RED
                 #
                 print("Found GREEN - setting diode color to ORANGE")
-                print("{} pixels are matching color {} to {} ".format(pixell, weaker, stronger))
                 pixell.fill(ORANGE)
                 pixell.show()
                 print("SLA WILL EXPIRE TODAY")
@@ -102,7 +102,6 @@ if __name__ == "__main__":
                     # Found PIC_COLOR_3 in picture, setting LED to GREEN
                     #
                     print("Found ORANGE - setting diode color to RED")
-                    print("{} pixels are matching color {} to {} ".format(pixell, weaker, stronger))
                     pixell.fill(RED)
                     pixell.show()
                     print("SLA WILL EXPIRE IN 1 HOUR")
@@ -113,7 +112,6 @@ if __name__ == "__main__":
                     pixell.fill(BLACK)
                     pixell.show()
                     print("Found no PIC_COLOR_X - setting pixel to BLACK")
-                    print("{} pixels are matching color {} to {} ".format(pixell, weaker, stronger))
 
         # Needed for CV2 image stuff to work
         cv2.waitKey(0)

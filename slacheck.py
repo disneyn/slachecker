@@ -1,11 +1,12 @@
 from numpy.lib.twodim_base import mask_indices
-import neopixel
-import board
 import time
 import cv2
 import numpy as np
 
+import neopixel
+import board
 pixell = neopixel.NeoPixel(board.D18, 1, auto_write=False)
+
 #
 # If you have more diodes, initiate like:
 # pixels = neopixel.NeoPixel(board.D18, NUM_DIODES, auto_write=False)
@@ -23,36 +24,36 @@ ORANGE = (255, 165, 0)
 #
 # These are the color definitions we are looking for in the picture
 #
-colors ={
+colors = {
     # This is color definition #1
     "PIC_COLOR_1": {
-        "weaker" : np.array([80, 100, 100]),
-        "stronger" : np.array([95,255,255])
+        "weaker": np.array([80, 100, 100]),
+        "stronger": np.array([95, 255, 255])
     },
     # This is color definition #2
-    "PIC_COLOR_2":{
-        "weaker" : np.array([56, 180, 100]),
-        "stronger" : np.array([65,255,255])
+    "PIC_COLOR_2": {
+        "weaker": np.array([56, 180, 100]),
+        "stronger": np.array([65, 255, 255])
     },
     # This is color definition #3
-    "PIC_COLOR_3":{
-        "weaker" : np.array([20, 100, 100]),
-        "stronger" : np.array([35,255,255])
+    "PIC_COLOR_3": {
+        "weaker": np.array([20, 100, 100]),
+        "stronger": np.array([35, 255, 255])
     }
 }
 
-
 mask = None
 
+
 def has_color(hsv, colorname):
-    global mask # Hacky way of using global variables in Python
+    global mask  # Hacky way of using global variables in Python
 
     c = colors[colorname]
     mask = cv2.inRange(hsv, c["weaker"], c["stronger"])
     pixels = cv2.countNonZero(mask)
-    print("{} pixels are matching color {} to {} ".format(pixell,c["weaker"], c["stronger"]))
+    print("{} pixels are matching color {} to {} ".format(pixels, c["weaker"], c["stronger"]))
 
-    return pixels > 0
+    return pixels > 1000
 
 
 #
@@ -65,13 +66,13 @@ if __name__ == "__main__":
     while True:
 
         # Load updated picture.jpg
-        img  = cv2.imread(path)
-        imgCropped = img[180:935,0:400]
+        img = cv2.imread(path)
+        imgCropped = img[180:935, 0:400]
         hsv = cv2.cvtColor(imgCropped, cv2.COLOR_BGR2HSV)
 
         # Update on every loop
-        #cv2.imshow('Image', imgCropped)
-        #cv2.imshow('Results', mask)
+        # cv2.imshow('Image', imgCropped)
+        # cv2.imshow('Results', mask)
 
         if has_color(imgCropped, "PIC_COLOR_1"):
             #
